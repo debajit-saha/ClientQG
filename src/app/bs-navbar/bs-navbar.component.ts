@@ -1,3 +1,4 @@
+import { AuthService } from './../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bs-navbar.component.css']
 })
 export class BsNavbarComponent implements OnInit {
+  user$;
+  user;
+  constructor(private authService: AuthService) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  async ngOnInit() {
+    this.authService.getUserInfo().take(1).subscribe(user =>
+        this.user = user.json());
   }
 
 }
