@@ -1,4 +1,8 @@
-
 <div class="row">
-  <question-filter></question-filter>
+    <div class="col-3">
+        <question-filter [category]="category" [difficulty]="difficulty"></question-filter>
+    </div>
+    <div class="col">
+        <question-card [questions]="filteredQuestions"></question-card>
+    </div>
 </div>

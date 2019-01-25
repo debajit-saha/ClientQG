@@ -1,5 +1,6 @@
+import { QuestionService } from './Services/question.service';
 import { CategoryService } from './Services/category.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './Services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
@@ -8,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -17,6 +18,7 @@ import { InvalidUserComponent } from './invalid-user/invalid-user.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { QuestionFilterComponent } from './question-filter/question-filter.component';
 import { QuestionCardComponent } from './question-card/question-card.component';
+import { DfficultyLevelService } from './Services/difficulty-level.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { QuestionCardComponent } from './question-card/question-card.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    EditorModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', 
         component: QuestionsComponent,
@@ -50,7 +52,9 @@ import { QuestionCardComponent } from './question-card/question-card.component';
     HttpClient,
     AuthGuard,
     AuthService,
-    CategoryService
+    CategoryService,
+    QuestionService,
+    DfficultyLevelService
   ],
   bootstrap: [AppComponent]
 })

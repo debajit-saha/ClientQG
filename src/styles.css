@@ -2,3 +2,27 @@
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
+
+  
+  h1, h2, h3 { 
+    margin-bottom: 1.5rem;
+  }
+  
+  .navbar { 
+    border-bottom: 3px solid #e7e7e7;
+  }
+  
+  .navbar-light .navbar-brand {
+    color: #c1d62e;
+  }
+  
+  .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: #b1c522;
+  }
+  
+  .list-group-item.active {
+    background-color: #c1d62e;
+    border-color: #c1d62e;
+  }
+  
+  

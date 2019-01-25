@@ -1,3 +1,18 @@
-<p>
-  question-card works!
-</p>
+<div class="row" *ngIf="questions">
+    <ng-container *ngFor="let q of questions; let i = index">
+        <div class="card" 
+            [style.border]="q.difficultyType == 'Low' ? '1px solid yellow' :
+                            q.difficultyType == 'Medium' ? '1px solid green' : '1px solid orange'
+                        ">
+            <h5 class="card-header">{{ i+1 }}) {{ q.name }} </h5>
+                <div class="card-body">
+                    <p class="card-text"> <b>a)</b> {{ q.option1 }} </p>
+                    <p class="card-text"> <b>b)</b> {{ q.option2 }} </p>
+                    <p class="card-text"> <b>c)</b> {{ q.option3 }} </p>
+                    <p class="card-text"> <b>d)</b> {{ q.option4 }} </p>
+                    <p class="card-text"> <b>Answer:</b> {{ q.answer }} </p>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                </div>
+        </div>              
+    </ng-container>
+</div>
