@@ -4,13 +4,14 @@
             [style.border]="q.difficultyType == 'Low' ? '1px solid yellow' :
                             q.difficultyType == 'Medium' ? '1px solid green' : '1px solid orange'
                         ">
-            <h5 class="card-header">{{ i+1 }}) {{ q.name }} </h5>
+            <h5 class="card-header" [innerHTML]="q.name"></h5>
                 <div class="card-body">
-                    <p class="card-text"> <b>a)</b> {{ q.option1 }} </p>
-                    <p class="card-text"> <b>b)</b> {{ q.option2 }} </p>
-                    <p class="card-text"> <b>c)</b> {{ q.option3 }} </p>
-                    <p class="card-text"> <b>d)</b> {{ q.option4 }} </p>
-                    <p class="card-text"> <b>Answer:</b> {{ q.answer }} </p>
+                    <div class="inline">a) <span class="card-text" [innerHTML]="q.option1"></span></div> 
+                    <div class="inline">b) <span class="card-text" [innerHTML]="q.option2"></span></div>
+                    <div class="inline">c) <span class="card-text" [innerHTML]="q.option3"></span></div>
+                    <div class="inline">d) <span class="card-text" [innerHTML]="q.option4"></span></div>
+                    <br />
+                    <div class="inline">Answer: <span class="card-text" [innerHTML]="q.answer"></span></div>
                     <a href="#" class="btn btn-primary">Edit</a>
                 </div>
         </div>              

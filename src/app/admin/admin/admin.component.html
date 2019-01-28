@@ -1,0 +1,231 @@
+
+<h3>Manage Users, Accounts, Categories</h3>
+
+<div class="row">
+  <div class="col-6">
+    <div class="form-group">
+        <label for="display">Display</label>
+        <select id="display" [(ngModel)]="displayDropdown" class="form-control" 
+          (ngModelChange)="onDisplayDropDownChanged($event)">
+           <option *ngFor="let type of dropDownValues" [ngValue]="type">{{ type.Name }}</option>
+        </select>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+        <label for="add">Add New</label>
+        <select id="add" [(ngModel)]="addDropdown" class="form-control" 
+          (ngModelChange)="onAddDropDownChanged($event)">
+            <option *ngFor="let type of dropDownValues" [ngValue]="type">{{ type.Name }}</option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="displaySearchBox">
+    <input 
+      #query
+      (keyup)="filter(query.value)"
+      type="text" class="form-control" placeholder="Search by first name...">
+</p>
+
+<data-table
+  *ngIf = "displayTableForUser"
+  [items]="items"
+  [substituteRows]="false"
+  [itemCount]="itemCount"
+  (reload)="reloadItems($event)">
+  <data-table-column
+    [property]="'globalId'"  
+    [header]="'Global Id'"
+    [sortable]="true"
+    [resizable]="true"
+  >
+  </data-table-column>
+  
+  <data-table-column
+    [property]="'firstName'"  
+    [header]="'First Name'"
+    [sortable]="true"
+    [resizable]="true"
+  >
+  </data-table-column>
+
+  <data-table-column
+    [property]="'lastName'"  
+    [header]="'Last Name'"
+    [sortable]="true"
+    [resizable]="true"
+  >
+  </data-table-column>
+
+  <data-table-column
+  [property]="'emailId'"  
+  [header]="'Email Id'"
+  [sortable]="true"
+  [resizable]="true"
+>
+  </data-table-column>
+
+  <data-table-column
+  [property]="'accountType'"  
+  [header]="'Account Type'"
+  [sortable]="true"
+  [resizable]="true"
+  >
+  </data-table-column>
+
+  <data-table-column
+  [property]="'isAdmin'"  
+  [header]="'Admin'"
+  [sortable]="true"
+  [resizable]="true"
+  >
+    <ng-template #dataTableHeader let-item="item">
+      <span style="color: rgb(232, 0, 0)">Admin</span>
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <span *ngIf="item.isAdmin">Yes</span>
+      <span *ngIf="!item.isAdmin">No</span>
+    </ng-template>
+  </data-table-column>
+</data-table>
+
+<div class="row">
+  <div class="col-sm-6">
+      <data-table
+        *ngIf = "displayTableForCategory"
+        [items]="items"
+        [substituteRows]="false"
+        [itemCount]="itemCount"
+        (reload)="reloadItems($event)">
+        <data-table-column
+          [property]="'name'"  
+          [header]="'Category Type'"
+          [sortable]="true"
+          [resizable]="true"
+        >
+        </data-table-column>
+      </data-table>
+ </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+        <data-table 
+        *ngIf = "displayTableForAccount"
+        [items]="items"
+        [substituteRows]="false"
+        [itemCount]="itemCount"
+        (reload)="reloadItems($event)">
+        <data-table-column
+          [property]="'name'"  
+          [header]="'Account Type'"
+          [sortable]="true"
+          [resizable]="true"
+        >
+        </data-table-column>
+      </data-table>
+  </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-6">         
+          <form *ngIf="addUserForm" #f="ngForm" (ngSubmit)="SaveUser(f.value)">
+            <br />
+            <label><b>Add New User</b></label>
+            <div class="form-group">
+              <label for="globalId">Global Id</label>
+              <input id="globalId" #globalId="ngModel" ngModel name="globalId" type="text" class="form-control"
+                required>
+              <div class="alert alert-danger" *ngIf="globalId.touched && globalId.invalid">
+                Global Id is required.
+              </div>
+            </div>  
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" #firstName="ngModel" ngModel name="firstName" type="text" class="form-control"
+                  required>
+                <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+                    First Name is required.
+                </div>
+            </div>   
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" #lastName="ngModel" ngModel name="lastName" type="text" class="form-control"
+                  required>
+                <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+                    Last Name is required.
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <label for="accountType">Account Type</label>
+                <select #accountType="ngModel" ngModel name="accountType" id="accountType" class="form-control"
+                  required>
+                  <option value="">Select Account Type</option>
+                  <option *ngFor="let a of accounts" [value]="a.id">
+                    {{ a.name }}
+                  </option>
+                </select>
+                <div class="alert alert-danger" *ngIf="accountType.touched && accountType.invalid">
+                  Account Type is required.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input #isAdmin="ngModel" ngModel name="isAdmin" type="checkbox" value="" id="isAdmin">
+                <label for="isAdmin">Check this account as Admin</label>
+            </div>
+
+            <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
+            <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>   
+      
+      
+<div class="row">
+  <div class="col-md-6">
+      <form *ngIf="addAccountForm" #f="ngForm" (ngSubmit)="SaveAccount(f.value)">
+          <br />
+          <label><b>Add New Account Type</b></label>
+        <div class="form-group">
+          <label for="accountType">Account Type</label>
+          <input id="accountType" #accountType="ngModel" ngModel name="accountType" type="text" class="form-control"
+                  required>
+          <div class="alert alert-danger" *ngIf="accountType.touched && accountType.invalid">
+              Account Type is required.
+          </div>
+        </div>   
+        <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
+      </form>
+  </div>
+</div>    
+
+<div class="row">
+    <div class="col-md-6">
+        <form *ngIf="addCategoryForm" #f="ngForm" (ngSubmit)="SaveCategory(f.value)">
+            <br />
+            <label><b>Add New Category Type</b></label>
+          <div class="form-group">
+            <label for="categoryType">Category Type</label>
+            <input id="categoryType" #categoryType="ngModel" ngModel name="categoryType" type="text" class="form-control"
+                    required>
+            <div class="alert alert-danger" *ngIf="categoryType.touched && categoryType.invalid">
+                Category Type is required.
+            </div>
+          </div>   
+          <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+  </div>    
+
+
+
+
+
+
+

@@ -10,4 +10,8 @@ export class CategoryService {
     return this.http.get(this.apiRoute + 'getAllCategories', { withCredentials: true });
   }
 
+  create(value : string){
+    return this.http.post(this.apiRoute + 'addNewCategory?categoryType='+value, null, { withCredentials: true })
+  }
+
 }

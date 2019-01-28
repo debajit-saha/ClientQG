@@ -17,11 +17,7 @@ export class QuestionFilterComponent implements OnInit {
   ngOnInit() {
       this.categoryService.getCategories().take(1).subscribe(data => {
          this.categories = data.json();
-      });
-
-      // this.difficultyLevel.getDifficultyLevel().take(1).subscribe(data => {
-      //   this.difficulty = data.json();
-      // })
+      });     
   }
 
 }

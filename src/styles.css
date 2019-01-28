@@ -2,9 +2,16 @@
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
   
-  h1, h2, h3 { 
+
+  h1, h2, h3, h4 { 
+    font-size: 2rem;
     margin-bottom: 1.5rem;
   }
   
