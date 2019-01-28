@@ -85,8 +85,8 @@
       <span style="color: rgb(232, 0, 0)">Admin</span>
     </ng-template>
     <ng-template #dataTableCell let-item="item">
-      <span *ngIf="item.isAdmin">Yes</span>
-      <span *ngIf="!item.isAdmin">No</span>
+      <span *ngIf="item.isAdmin"><i class="fas fa-check"></i></span>
+      <span *ngIf="!item.isAdmin"><i class="fas fa-times"></i></span>
     </ng-template>
   </data-table-column>
 </data-table>

@@ -14,7 +14,7 @@ export class UserService {
   create(user : any){
 
    let body = JSON.stringify(user);            
-   let headers = new Headers({ 'Content-Type': 'application/json' });
+   let headers = new Headers({ 'Content-Type': 'application/json' , 'Access-Control-Allow-Headers' : 'true'});
    let options = new RequestOptions({ headers: headers, withCredentials: true });
   
 
