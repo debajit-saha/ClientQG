@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     canActivate() {
     return this.authService.authenticateUser()
             .map(user => {
-                if(user.json() == 1)
+                if(user == 1)
                     return true;
                 else{
                     this.router.navigate(['invalid-user']);

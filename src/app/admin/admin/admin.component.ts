@@ -3,7 +3,9 @@ import { AccountService } from './../../Services/account.service';
 import { CategoryService } from './../../Services/category.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'app/Services/user.service';
-import { DataTableResource } from 'angular-4-data-table';
+import { DataTableResource } from 'angular5-data-table';
+import { ValueTransformer } from '@angular/compiler/src/util';
+
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +47,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.getAccounts().take(1).subscribe(data => {
-      this.accounts = data.json();
+      this.accounts = <any[]>data;
     });
   }
 
@@ -86,7 +88,7 @@ export class AdminComponent implements OnInit {
   private getData(value : string) {
     if(value === 'User'){
       this.userService.getUsers().take(1).subscribe(data => {
-        this.users = data.json();
+        this.users = <any[]>data;
         this.initializeTable(this.users);
       });
     }
@@ -95,7 +97,7 @@ export class AdminComponent implements OnInit {
     }
     else if(value === 'Category'){
       this.categoryService.getCategories().take(1).subscribe(data => {
-        this.categories = data.json();
+        this.categories = <any[]>data;
         this.initializeTable(this.categories);
       })
     }
@@ -163,9 +165,9 @@ export class AdminComponent implements OnInit {
     }
 
     this.userService.create(user).take(1).subscribe(data => {
-      if(data.json()){
+      if(data){
         this.userService.getUsers().take(1).subscribe(data => {
-          this.users = data.json();
+          this.users = <any[]>data;
         });
         alert("User added sucessfully.")
         this.displayDropdown = this.dropDownValues[1];
@@ -178,9 +180,9 @@ export class AdminComponent implements OnInit {
 
   SaveAccount(data : any){
     this.accountService.create(data.accountType).take(1).subscribe(data => {
-      if(data.json()){
+      if(data){
         this.accountService.getAccounts().take(1).subscribe(data => {
-          this.accounts = data.json();
+          this.accounts = <any[]>data;
         });
         alert("Account added sucessfully.")
         this.displayDropdown = this.dropDownValues[2];
@@ -193,9 +195,9 @@ export class AdminComponent implements OnInit {
 
   SaveCategory(data : any){
     this.categoryService.create(data.categoryType).take(1).subscribe(data => {
-      if(data.json()){
+      if(data){
         this.categoryService.getCategories().take(1).subscribe(data => {
-          this.accounts = data.json();
+          this.accounts = <any[]>data;
         });        
         alert("Category added sucessfully.")
         this.displayDropdown = this.dropDownValues[3];
@@ -204,6 +206,12 @@ export class AdminComponent implements OnInit {
       else
         alert("Error occured.")
     });
+  }
+
+  updateCategory(value, id){
+    if(value.trim().length > 0){
+     console.log(id)
+    }
   }
 
 }

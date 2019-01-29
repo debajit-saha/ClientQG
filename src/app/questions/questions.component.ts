@@ -16,7 +16,7 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit() { 
     this.questionService.getQuestions().take(1).subscribe(data => {
-    this.questions = data.json();
+    this.questions = <any[]>data;
       this.populateProducts();
     }); 
   }

@@ -16,7 +16,7 @@ export class QuestionFilterComponent implements OnInit {
 
   ngOnInit() {
       this.categoryService.getCategories().take(1).subscribe(data => {
-         this.categories = data.json();
+         this.categories = <any[]>data;
       });     
   }
 

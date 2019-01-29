@@ -34,6 +34,7 @@
   [items]="items"
   [substituteRows]="false"
   [itemCount]="itemCount"
+  [limit]="10"
   (reload)="reloadItems($event)">
   <data-table-column
     [property]="'globalId'"  
@@ -98,6 +99,7 @@
         [items]="items"
         [substituteRows]="false"
         [itemCount]="itemCount"
+        [limit]="10"
         (reload)="reloadItems($event)">
         <data-table-column
           [property]="'name'"  
@@ -106,6 +108,16 @@
           [resizable]="true"
         >
         </data-table-column>
+
+        <data-table-column
+        [property]="'id'"  
+        [header]="'Edit'"
+        >
+        <ng-template #dataTableCell let-item="item">
+          <input class="form-control" #query
+          (keyup.enter)="updateCategory(query.value, item.id)">
+        </ng-template>
+      </data-table-column>
       </data-table>
  </div>
 </div>
@@ -117,6 +129,7 @@
         [items]="items"
         [substituteRows]="false"
         [itemCount]="itemCount"
+        [limit]="10"
         (reload)="reloadItems($event)">
         <data-table-column
           [property]="'name'"  

@@ -1,10 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AccountService {
   apiRoute = 'http://localhost:8080/api/account/';
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getAccounts(){
     return this.http.get(this.apiRoute + 'getAllAccounts', { withCredentials: true });

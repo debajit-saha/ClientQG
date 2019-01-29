@@ -1,8 +1,8 @@
+import { UserService } from './Services/user.service';
 import { AccountService } from './Services/account.service';
-import { UserService } from 'app/Services/user.service';
 import { QuestionService } from './Services/question.service';
 import { CategoryService } from './Services/category.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './Services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
@@ -10,9 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { DataTableModule } from 'angular5-data-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DataTableModule } from 'angular-4-data-table';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -23,6 +22,7 @@ import { QuestionFilterComponent } from './question-filter/question-filter.compo
 import { QuestionCardComponent } from './question-card/question-card.component';
 import { DfficultyLevelService } from './Services/difficulty-level.service';
 import { AdminComponent } from './admin/admin/admin.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,10 +38,11 @@ import { AdminComponent } from './admin/admin/admin.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
-    DataTableModule,
+    DataTableModule.forRoot(),
     RouterModule.forRoot([
       { 
         path: '', 
