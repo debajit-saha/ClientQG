@@ -8,7 +8,7 @@ export class QuestionService {
   constructor(private http: HttpClient) { }
 
   getQuestions(){
-    return this.http.get(this.apiRoute + 'getQuestions', { withCredentials: true });
+    return this.http.get(this.apiRoute + 'getQuestions');
   }
 
 }

@@ -10,18 +10,22 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   getUsers(){
-    return this.http.get(this.apiRoute + 'getAllUsers', { withCredentials: true });
+    return this.http.get(this.apiRoute + 'getAllUsers');
   }
 
   create(user : any){
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded',
+        'content-type' : 'application/json; charset=utf-8',
         'withCredentials': 'true'
       })
     };
     return this.http.post(this.apiRoute + 'addNewUser', user, httpOptions);
+  }
+
+  delete(value){
+    return this.http.delete(this.apiRoute + 'deleteUser?userId=' + value);
   }
 
 }

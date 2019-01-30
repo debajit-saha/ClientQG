@@ -8,11 +8,19 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   getAccounts(){
-    return this.http.get(this.apiRoute + 'getAllAccounts', { withCredentials: true });
+    return this.http.get(this.apiRoute + 'getAllAccounts');
   }
 
   create(value : string){
-    return this.http.post(this.apiRoute + 'addNewAccount?accountType='+value, null, { withCredentials: true })
+    return this.http.post(this.apiRoute + 'addNewAccount?accountType='+value, null)
+  }
+
+  update(value){
+    return this.http.put(this.apiRoute + 'updateAccount', value);
+  }
+
+  delete(value){
+    return this.http.delete(this.apiRoute + 'deleteAccount?accountTypeId=' + value);
   }
 
 }

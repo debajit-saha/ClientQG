@@ -93,7 +93,10 @@ export class AdminComponent implements OnInit {
       });
     }
     else if(value === 'Account'){
-      this.initializeTable(this.accounts);
+      this.accountService.getAccounts().take(1).subscribe(data => {
+        this.accounts = <any[]>data;
+        this.initializeTable(this.accounts);
+      })   
     }
     else if(value === 'Category'){
       this.categoryService.getCategories().take(1).subscribe(data => {
@@ -161,7 +164,8 @@ export class AdminComponent implements OnInit {
       accountType: data.accountType,
       firstName: data.firstName,
       lastName: data.lastName,
-      isAdmin: data.isAdmin
+      isAdmin: data.isAdmin,
+      emailId: data.emailId
     }
 
     this.userService.create(user).take(1).subscribe(data => {
@@ -208,10 +212,81 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  updateCategory(value, id){
+  updateAccount(id, value){
     if(value.trim().length > 0){
-     console.log(id)
+      let data = {
+        accountId : id,
+        accountName : value
+      };
+      this.accountService.update(data).take(1).subscribe(data => {
+        if(data){
+          this.displayDropdown = this.dropDownValues[2];
+          this.onDisplayDropDownChanged(this.displayDropdown);
+        }
+        else{
+          alert("Error occured.");
+        }
+      })
     }
   }
 
+  updateCategory(id, value){
+    if(value.trim().length > 0){
+      let data = {
+        categoryId : id,
+        categoryName : value
+      };
+      this.categoryService.update(data).take(1).subscribe(data => {
+        if(data){
+          this.displayDropdown = this.dropDownValues[3];
+          this.onDisplayDropDownChanged(this.displayDropdown);
+        }
+        else{
+          alert("Error occured.");
+        }
+      });
+    }
+  }
+
+  deleteAccount(id){
+    if(id){
+      this.accountService.delete(id).take(1).subscribe(data => {
+        if(data){
+          this.displayDropdown = this.dropDownValues[2];
+          this.onDisplayDropDownChanged(this.displayDropdown);
+        }
+        else{
+          alert("Error occured.");
+        }
+      });
+    }
+  }
+
+  deleteCategory(id){
+    if(id){
+      this.categoryService.delete(id).take(1).subscribe(data => {
+        if(data){
+          this.displayDropdown = this.dropDownValues[3];
+          this.onDisplayDropDownChanged(this.displayDropdown);
+        }
+        else{
+          alert("Error occured.");
+        }
+      });
+    }
+  }
+
+  deleteUser(id){
+    if(id){
+      this.userService.delete(id).take(1).subscribe(data => {
+        if(data){
+          this.displayDropdown = this.dropDownValues[1];
+          this.onDisplayDropDownChanged(this.displayDropdown);
+        }
+        else{
+          alert("Error occured.");
+        }
+      });
+    }
+  }
 }

@@ -8,7 +8,7 @@ export class DfficultyLevelService {
   constructor(private http: HttpClient) { }
 
   getDifficultyLevel(){
-    return this.http.get(this.apiRoute + 'getAllDifficulty', { withCredentials: true });
+    return this.http.get(this.apiRoute + 'getAllDifficulty');
   }
 
 }

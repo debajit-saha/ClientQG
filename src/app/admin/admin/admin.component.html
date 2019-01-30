@@ -28,7 +28,6 @@
       (keyup)="filter(query.value)"
       type="text" class="form-control" placeholder="Search by first name...">
 </p>
-
 <data-table
   *ngIf = "displayTableForUser"
   [items]="items"
@@ -41,6 +40,7 @@
     [header]="'Global Id'"
     [sortable]="true"
     [resizable]="true"
+    [width]="'8rem'"
   >
   </data-table-column>
   
@@ -81,6 +81,7 @@
   [header]="'Admin'"
   [sortable]="true"
   [resizable]="true"
+  [width]="'6rem'"
   >
     <ng-template #dataTableHeader let-item="item">
       <span style="color: rgb(232, 0, 0)">Admin</span>
@@ -90,40 +91,30 @@
       <span *ngIf="!item.isAdmin"><i class="fas fa-times"></i></span>
     </ng-template>
   </data-table-column>
+
+  <data-table-column
+        [property]="'id'"  
+        [width]="'4rem'"
+      >
+        <ng-template #dataTableCell let-item="item">
+          <button class="btn btn-warning"
+          (click)="deleteAccount(item.id)">Edit</button>
+        </ng-template>
+  </data-table-column>
+
+  <data-table-column
+        [property]="'id'"  
+        [width]="'6rem'"
+      >
+        <ng-template #dataTableCell let-item="item">
+          <button class="btn btn-warning"
+          (click)="deleteUser(item.globalId)">Delete</button>
+        </ng-template>
+  </data-table-column>
 </data-table>
 
 <div class="row">
-  <div class="col-sm-6">
-      <data-table
-        *ngIf = "displayTableForCategory"
-        [items]="items"
-        [substituteRows]="false"
-        [itemCount]="itemCount"
-        [limit]="10"
-        (reload)="reloadItems($event)">
-        <data-table-column
-          [property]="'name'"  
-          [header]="'Category Type'"
-          [sortable]="true"
-          [resizable]="true"
-        >
-        </data-table-column>
-
-        <data-table-column
-        [property]="'id'"  
-        [header]="'Edit'"
-        >
-        <ng-template #dataTableCell let-item="item">
-          <input class="form-control" #query
-          (keyup.enter)="updateCategory(query.value, item.id)">
-        </ng-template>
-      </data-table-column>
-      </data-table>
- </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-9">
         <data-table 
         *ngIf = "displayTableForAccount"
         [items]="items"
@@ -138,11 +129,72 @@
           [resizable]="true"
         >
         </data-table-column>
+
+        <data-table-column
+        [property]="'id'"  
+        [header]="'Edit'"
+        >
+        <ng-template #dataTableCell let-item="item">
+          <input class="form-control" #query
+          (keyup.enter)="updateAccount(item.id, query.value)">
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column
+        [property]="'id'"  
+      >
+        <ng-template #dataTableCell let-item="item">
+          <button class="btn btn-warning"
+          (click)="deleteAccount(item.id)">Delete</button>
+        </ng-template>
+      </data-table-column>
       </data-table>
   </div>
 </div>
 
-    <div class="row">
+<div class="row">
+  <div class="col-sm-9">
+      <data-table
+        *ngIf = "displayTableForCategory"
+        [items]="items"
+        [substituteRows]="false"
+        [itemCount]="itemCount"
+        [limit]="10"
+        (reload)="reloadItems($event)">
+        <data-table-column
+          [property]="'name'"  
+          [header]="'Category Type'"
+          [sortable]="true"
+          [resizable]="true"
+        >
+        <ng-template #dataTableCell let-item="item">
+            <label>{{ item.name }} </label>
+        </ng-template>
+        </data-table-column>
+
+        <data-table-column
+        [property]="'id'"  
+        [header]="'Edit'"
+        >
+        <ng-template #dataTableCell let-item="item">
+          <input class="form-control" #query
+          (keyup.enter)="updateCategory(item.id, query.value)">
+        </ng-template>
+      </data-table-column>
+
+      <data-table-column
+        [property]="'id'"  
+      >
+        <ng-template #dataTableCell let-item="item">
+          <button class="btn btn-warning"
+          (click)="deleteCategory(item.id)">Delete</button>
+        </ng-template>
+      </data-table-column>
+      </data-table>
+ </div>
+</div>
+
+<div class="row">
         <div class="col-md-6">         
           <form *ngIf="addUserForm" #f="ngForm" (ngSubmit)="SaveUser(f.value)">
             <br />
@@ -175,11 +227,21 @@
             </div> 
 
             <div class="form-group">
+              <label for="emailId">Email Id</label>
+              <input email id="emailId" #emailId="ngModel" ngModel name="emailId" type="text" class="form-control"
+                required>
+              <div class="alert alert-danger" *ngIf="emailId.touched && emailId.invalid">
+                <div *ngIf="emailId.errors.required">Email Id is required.</div>
+                <div *ngIf="emailId.errors.email">Email Id not valid.</div>
+              </div>              
+            </div> 
+
+            <div class="form-group">
                 <label for="accountType">Account Type</label>
                 <select #accountType="ngModel" ngModel name="accountType" id="accountType" class="form-control"
                   required>
                   <option value="">Select Account Type</option>
-                  <option *ngFor="let a of accounts" [value]="a.id">
+                  <option *ngFor="let a of accounts" [value]="a.name">
                     {{ a.name }}
                   </option>
                 </select>
@@ -197,8 +259,7 @@
             <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
           </form>
         </div>
-      </div>   
-      
+</div>        
       
 <div class="row">
   <div class="col-md-6">
@@ -234,7 +295,7 @@
           <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
         </form>
     </div>
-  </div>    
+</div>    
 
 
 

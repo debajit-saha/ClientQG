@@ -7,10 +7,10 @@ export class AuthService {
     constructor(private http: HttpClient){}
 
     authenticateUser() {
-        return this.http.get(this.apiRoute + 'user', { withCredentials: true });
+        return this.http.get(this.apiRoute + 'user');
     }
 
     getUserInfo(){
-        return this.http.get(this.apiRoute + 'userInfo', { withCredentials: true })
+        return this.http.get(this.apiRoute + 'userInfo');
     }
 }

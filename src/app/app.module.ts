@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataTableModule } from 'angular5-data-table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -43,6 +44,7 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     NgbModule.forRoot(),
     DataTableModule.forRoot(),
+    CustomFormsModule,
     RouterModule.forRoot([
       { 
         path: '', 
