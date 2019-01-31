@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions  } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
@@ -24,8 +23,8 @@ export class UserService {
     return this.http.post(this.apiRoute + 'addNewUser', user, httpOptions);
   }
 
-  delete(value){
-    return this.http.delete(this.apiRoute + 'deleteUser?userId=' + value);
+  deactive(value){
+    return this.http.put(this.apiRoute + 'deactivateUser?userId=' + value, null);
   }
 
 }

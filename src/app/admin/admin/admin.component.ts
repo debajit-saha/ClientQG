@@ -161,7 +161,6 @@ export class AdminComponent implements OnInit {
   SaveUser(data : any){
     let user = {
       globalId: data.globalId,
-      accountType: data.accountType,
       firstName: data.firstName,
       lastName: data.lastName,
       isAdmin: data.isAdmin,
@@ -248,37 +247,37 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  deleteAccount(id){
-    if(id){
-      this.accountService.delete(id).take(1).subscribe(data => {
-        if(data){
-          this.displayDropdown = this.dropDownValues[2];
-          this.onDisplayDropDownChanged(this.displayDropdown);
-        }
-        else{
-          alert("Error occured.");
-        }
-      });
-    }
-  }
+  // deleteAccount(id){
+  //   if(id){
+  //     this.accountService.delete(id).take(1).subscribe(data => {
+  //       if(data){
+  //         this.displayDropdown = this.dropDownValues[2];
+  //         this.onDisplayDropDownChanged(this.displayDropdown);
+  //       }
+  //       else{
+  //         alert("Error occured.");
+  //       }
+  //     });
+  //   }
+  // }
 
-  deleteCategory(id){
-    if(id){
-      this.categoryService.delete(id).take(1).subscribe(data => {
-        if(data){
-          this.displayDropdown = this.dropDownValues[3];
-          this.onDisplayDropDownChanged(this.displayDropdown);
-        }
-        else{
-          alert("Error occured.");
-        }
-      });
-    }
-  }
+  // deleteCategory(id){
+  //   if(id){
+  //     this.categoryService.delete(id).take(1).subscribe(data => {
+  //       if(data){
+  //         this.displayDropdown = this.dropDownValues[3];
+  //         this.onDisplayDropDownChanged(this.displayDropdown);
+  //       }
+  //       else{
+  //         alert("Error occured.");
+  //       }
+  //     });
+  //   }
+  // }
 
-  deleteUser(id){
+  deactiveUser(id){
     if(id){
-      this.userService.delete(id).take(1).subscribe(data => {
+      this.userService.deactive(id).take(1).subscribe(data => {
         if(data){
           this.displayDropdown = this.dropDownValues[1];
           this.onDisplayDropDownChanged(this.displayDropdown);

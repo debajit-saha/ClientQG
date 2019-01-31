@@ -59,6 +59,7 @@ import { CommonModule } from '@angular/common';
       { 
         path: 'invalid-user', 
         component: InvalidUserComponent,
+        canActivate: [AuthGuard] 
       },  
       { 
         path: 'admin', 

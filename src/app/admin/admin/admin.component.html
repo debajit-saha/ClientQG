@@ -40,7 +40,6 @@
     [header]="'Global Id'"
     [sortable]="true"
     [resizable]="true"
-    [width]="'8rem'"
   >
   </data-table-column>
   
@@ -69,19 +68,10 @@
   </data-table-column>
 
   <data-table-column
-  [property]="'accountType'"  
-  [header]="'Account Type'"
-  [sortable]="true"
-  [resizable]="true"
-  >
-  </data-table-column>
-
-  <data-table-column
   [property]="'isAdmin'"  
   [header]="'Admin'"
   [sortable]="true"
   [resizable]="true"
-  [width]="'6rem'"
   >
     <ng-template #dataTableHeader let-item="item">
       <span style="color: rgb(232, 0, 0)">Admin</span>
@@ -92,7 +82,7 @@
     </ng-template>
   </data-table-column>
 
-  <data-table-column
+  <!-- <data-table-column
         [property]="'id'"  
         [width]="'4rem'"
       >
@@ -100,21 +90,38 @@
           <button class="btn btn-warning"
           (click)="deleteAccount(item.id)">Edit</button>
         </ng-template>
-  </data-table-column>
+  </data-table-column> -->
 
   <data-table-column
+  [property]="'isActive'"  
+  [header]="'Admin'"
+  [sortable]="true"
+  [resizable]="true"
+  >
+    <ng-template #dataTableHeader let-item="item">
+      <span style="color: rgb(232, 0, 0)">IsActive</span>
+    </ng-template>
+    <ng-template #dataTableCell let-item="item">
+      <span *ngIf="item.isActive"><i class="fas fa-check"></i></span>
+      <span *ngIf="!item.isActive"><i class="fas fa-times"></i></span>
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column  
         [property]="'id'"  
-        [width]="'6rem'"
       >
         <ng-template #dataTableCell let-item="item">
-          <button class="btn btn-warning"
-          (click)="deleteUser(item.globalId)">Delete</button>
+          <button class="btn btn-warning" *ngIf="!item.isAdmin && item.isActive"
+          (click)="deactiveUser(item.globalId)">De-activate</button>
+
+          <button class="btn btn-primary" *ngIf="!item.isAdmin && !item.isActive"
+          (click)="deactiveUser(item.globalId)">Activate</button>
         </ng-template>
   </data-table-column>
 </data-table>
 
 <div class="row">
-  <div class="col-sm-9">
+  <div class="col-sm-6">
         <data-table 
         *ngIf = "displayTableForAccount"
         [items]="items"
@@ -140,20 +147,20 @@
         </ng-template>
       </data-table-column>
 
-      <data-table-column
+      <!-- <data-table-column
         [property]="'id'"  
       >
         <ng-template #dataTableCell let-item="item">
           <button class="btn btn-warning"
           (click)="deleteAccount(item.id)">Delete</button>
         </ng-template>
-      </data-table-column>
-      </data-table>
+      </data-table-column>-->
+      </data-table> 
   </div>
 </div>
 
 <div class="row">
-  <div class="col-sm-9">
+  <div class="col-sm-6">
       <data-table
         *ngIf = "displayTableForCategory"
         [items]="items"
@@ -182,15 +189,15 @@
         </ng-template>
       </data-table-column>
 
-      <data-table-column
+      <!-- <data-table-column
         [property]="'id'"  
       >
         <ng-template #dataTableCell let-item="item">
           <button class="btn btn-warning"
           (click)="deleteCategory(item.id)">Delete</button>
         </ng-template>
-      </data-table-column>
-      </data-table>
+      </data-table-column>-->
+      </data-table> 
  </div>
 </div>
 
@@ -236,19 +243,19 @@
               </div>              
             </div> 
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="accountType">Account Type</label>
                 <select #accountType="ngModel" ngModel name="accountType" id="accountType" class="form-control"
                   required>
                   <option value="">Select Account Type</option>
-                  <option *ngFor="let a of accounts" [value]="a.name">
+                  <option *ngFor="let a of accounts" [value]="a.id">
                     {{ a.name }}
                   </option>
                 </select>
                 <div class="alert alert-danger" *ngIf="accountType.touched && accountType.invalid">
                   Account Type is required.
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <input #isAdmin="ngModel" ngModel name="isAdmin" type="checkbox" value="" id="isAdmin">
