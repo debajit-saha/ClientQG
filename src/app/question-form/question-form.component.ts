@@ -66,4 +66,14 @@ export class QuestionFormComponent implements OnInit {
      }
    })
   }
+
+  public options: Object = {
+    placeholder: "Edit Me",
+    events : {
+      'froalaEditor.focus' : function(e, editor) {
+        console.log(editor.selection.get());
+      }
+    }
+  }
+
 }
