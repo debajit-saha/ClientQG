@@ -24,6 +24,8 @@ import { QuestionCardComponent } from './question-card/question-card.component';
 import { DfficultyLevelService } from './Services/difficulty-level.service';
 import { AdminComponent } from './admin/admin/admin.component';
 import { CommonModule } from '@angular/common';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { CommonModule } from '@angular/common';
     NgbModule.forRoot(),
     DataTableModule.forRoot(),
     CustomFormsModule,
+    MatRadioModule,
+    MatCheckboxModule,
     RouterModule.forRoot([
       { 
         path: '', 

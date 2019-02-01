@@ -23,4 +23,6 @@ export class CategoryService {
     return this.http.delete(this.apiRoute + 'deleteCategory?categoryTypeId=' + value);
   }
 
+
+
 }

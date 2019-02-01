@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 @Injectable()
 export class QuestionService {
@@ -11,4 +10,13 @@ export class QuestionService {
     return this.http.get(this.apiRoute + 'getQuestions');
   }
 
+  create(question){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json; charset=utf-8',
+        'withCredentials': 'true'
+      })
+    };
+    return this.http.post(this.apiRoute + 'postQuestions', question, httpOptions);
+  }
 }

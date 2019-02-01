@@ -1,1 +1,121 @@
-
+<form #f="ngForm" (ngSubmit)="SaveQuestion(f.value)">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="categoryType"><b>Catgory Type</b></label>
+                    <select #categoryTypeId="ngModel" [(ngModel)]="questionform.categoryTypeId" name="categoryTypeId" id="categoryType" class="form-control"
+                                required>
+                                  <option *ngFor="let c of categories" [value]="c.id">
+                                    {{ c.name }}
+                                  </option>
+                    </select>
+                <div class="alert alert-danger" *ngIf="categoryTypeId.touched && categoryTypeId.invalid">
+                    Category Type is required.
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label><b>Account Type</b></label>
+                <input type="text" class="form-control" [value]="accountName" disabled/>
+            </div>
+        </div>
+    </div>   
+    <div class="form-group">
+    <label for="question"><b>Question</b></label>
+    <textarea rows="6" required 
+              id="question" 
+              class="form-control" 
+              name="question"
+              #question = "ngModel"
+              [(ngModel)]="questionform.question"></textarea>
+        <div class="alert alert-danger" *ngIf="question.touched && question.invalid">
+            Question is required.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="option1"><b>Option 1</b></label>
+                <textarea rows="4" 
+                        required 
+                        id="option1" 
+                        class="form-control" 
+                        name="option1"
+                        #option1 = "ngModel"
+                        [(ngModel)]="questionform.option1"></textarea>
+                <div class="alert alert-danger" *ngIf="option1.touched && option1.invalid">
+                    Option 1 is required.
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="option2"><b>Option 2</b></label>
+                <textarea rows="4" 
+                          required 
+                          id="option2" 
+                          class="form-control" 
+                          name="option2"
+                          #option2 = "ngModel"
+                          [(ngModel)]="questionform.option2"></textarea>
+                <div class="alert alert-danger" *ngIf="option2.touched && option2.invalid">
+                        Option 2 is required.
+                </div>
+            </div>
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="option3"><b>Option 3</b></label>
+                <textarea rows="4" 
+                            required 
+                            id="option3" 
+                            class="form-control" 
+                            name="option3"
+                            #option3 = "ngModel"
+                            [(ngModel)]="questionform.option3"></textarea>
+                <div class="alert alert-danger" *ngIf="option3.touched && option3.invalid">
+                        Option 3 is required.
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="option4"><b>Option 4</b></label>
+                <textarea rows="4" 
+                              required 
+                              id="option4" 
+                              class="form-control" 
+                              name="option4"
+                              #option4 = "ngModel"
+                              [(ngModel)]="questionform.option4"></textarea>
+                <div class="alert alert-danger" *ngIf="option4.touched && option4.invalid">
+                            Option 4 is required.
+                </div>
+            </div>
+        </div>       
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label><b>Answer</b></label> <br/>
+            <mat-radio-group [(ngModel)]="questionform.answer" #answer="ngModel" name="answer" required>              
+                <mat-radio-button value="option1">Option 1</mat-radio-button>
+                <mat-radio-button value="option2">Option 2</mat-radio-button>
+                <mat-radio-button value="option3">Option 3</mat-radio-button>
+                <mat-radio-button value="option4">Option 4</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="col">
+            <label><b>Difficulty Level</b></label> <br/>
+            <mat-radio-group [(ngModel)]="questionform.difficultyLevelId" #level="ngModel" name="level" required>              
+                <mat-radio-button value="1">Low</mat-radio-button>
+                <mat-radio-button value="2">Moderate</mat-radio-button>
+                <mat-radio-button value="3">High</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+    <br />    
+    <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
+</form>

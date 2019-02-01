@@ -23,4 +23,8 @@ export class AccountService {
     return this.http.delete(this.apiRoute + 'deleteAccount?accountTypeId=' + value);
   }
 
+  getAccountById(value){
+    return this.http.get(this.apiRoute + 'getAccountById?accountId=' + value);
+  }
+
 }

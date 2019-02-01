@@ -159,12 +159,14 @@ export class AdminComponent implements OnInit {
     }
   }
   SaveUser(data : any){
+    console.log(data)
     let user = {
       globalId: data.globalId,
       firstName: data.firstName,
       lastName: data.lastName,
       isAdmin: data.isAdmin,
-      emailId: data.emailId
+      emailId: data.emailId,
+      accountTypeId: data.accountTypeId    
     }
 
     this.userService.create(user).take(1).subscribe(data => {
