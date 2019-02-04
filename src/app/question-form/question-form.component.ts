@@ -48,8 +48,6 @@ export class QuestionFormComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) this.questionService.getQuestionById(this.id).take(1).subscribe(q => this.questionform = <any>q);
-
-    console.log(this.questionform)
   }
 
   formErrors : boolean = false;
@@ -145,4 +143,15 @@ export class QuestionFormComponent implements OnInit {
         this.formErrors = false;
   }
 
+  deleteQuestion(){
+    this.questionService.delete(this.id).take(1).subscribe(result => {
+      if(result){
+        alert("Question deleted Successfully.");
+        this.router.navigate(['']);
+    }
+    else{
+        alert("Error occured");
+    }
+   });
+  }
 }

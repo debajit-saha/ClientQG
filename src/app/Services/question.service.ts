@@ -33,4 +33,14 @@ export class QuestionService {
     };
     return this.http.put(this.apiRoute + 'updateQuestion', question, httpOptions); 
   }
+
+  delete(id){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json; charset=utf-8',
+        'withCredentials': 'true'
+      })
+    };
+    return this.http.put(this.apiRoute + 'deleteQuestion?id=' + id, null, httpOptions);
+  }
 }
