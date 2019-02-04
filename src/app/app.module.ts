@@ -57,6 +57,11 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
         component: QuestionsComponent,
         canActivate: [AuthGuard] 
       },
+      {
+        path: 'question-form/:id',
+        component: QuestionFormComponent,
+        canActivate: [AuthGuard]
+      },
       { 
         path: 'question-form', 
         component: QuestionFormComponent,

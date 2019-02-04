@@ -1,12 +1,12 @@
 
 export class QuestionForm {
-    question : string;
+    name : string;
     option1 : string;
     option2 : string;
     option3 : string;
     option4 : string;
     answer : string;
-    difficultyLevelId : number;
+    difficultyTypeId : number;
     categoryTypeId : number;
     accountTypeId : number;
 }

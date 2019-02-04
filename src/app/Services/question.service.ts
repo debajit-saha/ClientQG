@@ -10,6 +10,10 @@ export class QuestionService {
     return this.http.get(this.apiRoute + 'getQuestions');
   }
 
+  getQuestionById(id){
+    return this.http.get(this.apiRoute + 'getQuestion?id=' + id);
+  }
+
   create(question){
     const httpOptions = {
       headers: new HttpHeaders({
@@ -18,5 +22,15 @@ export class QuestionService {
       })
     };
     return this.http.post(this.apiRoute + 'postQuestions', question, httpOptions);
+  }
+
+  update(question){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json; charset=utf-8',
+        'withCredentials': 'true'
+      })
+    };
+    return this.http.put(this.apiRoute + 'updateQuestion', question, httpOptions); 
   }
 }
